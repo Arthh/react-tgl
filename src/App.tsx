@@ -1,17 +1,19 @@
 import React from 'react';
 
-import { BrowserRouter } from 'react-router-dom';
+import {BrowserRouter, Switch, Route } from 'react-router-dom';
 import GlobalStyles from './styles/GlobalStyles';
 
-import Header from './components/Header';
-
-import InitialContainer from './components/InitialContainer';
+import AuthPage from './pages/AuthPage';
+import ResetPassPage from './pages/ResetPassword';
 
 const App: React.FC = () => {
   return (
     <BrowserRouter>
       <GlobalStyles />
-      <InitialContainer />
+      <Switch>
+        <Route exact path ="/" component={AuthPage} />
+        <Route exact path ="/reset-pass" component={ResetPassPage} />
+      </Switch>
     </BrowserRouter>
   );
 }

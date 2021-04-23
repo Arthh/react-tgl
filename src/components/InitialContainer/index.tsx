@@ -1,13 +1,15 @@
 import React from 'react';
 
-import Form from '../Authentication';
-
 import { Container, LogoTGL, FormArea  } from './styles';
 
-const InitialContainer: React.FC = () => {
+interface IInitialProps {
+  children: React.ReactNode;
+}
+
+const InitialContainer: React.FC<IInitialProps> = ({ children }) => {
 
   return (
-    <Container>
+    <Container > 
       <LogoTGL>
         <div className="first-text-logo">
           <h2>The</h2>
@@ -20,7 +22,7 @@ const InitialContainer: React.FC = () => {
         </div>
       </LogoTGL>
       <FormArea>
-        <Form />
+        {children}
       </FormArea>
     </Container>
   );

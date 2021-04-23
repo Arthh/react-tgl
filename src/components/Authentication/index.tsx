@@ -1,6 +1,10 @@
 import React from 'react';
 
-import { Form, LogInButton, TitleOfForm } from './styles';
+import { LogInButton, TitleOfForm } from './styles';
+import arrowRight from '../../assets/icons/arrow-right(yellow).svg';
+
+import Form from '../../UI/Form';
+import Input from '../../UI/Input';
 
 const Authentication: React.FC = () => {
 
@@ -8,11 +12,14 @@ const Authentication: React.FC = () => {
     <>
     <TitleOfForm>Authentication</TitleOfForm>
     <Form>
-      <input placeholder="Email" />
-      <input placeholder="Password" />
+      <Input placeholder="Email" />
+      <Input placeholder="Password" />
       <a href="/">I forget my password</a>
       <LogInButton>
-        <button>Log In </button>
+        <button>
+          Log In 
+          <img src={arrowRight} alt="" />
+        </button>
       </LogInButton>
     </Form>
     </>
