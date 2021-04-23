@@ -13,7 +13,7 @@ const Authentication: React.FC = () => {
     <TitleOfForm>Authentication</TitleOfForm>
     <Form>
       <Input placeholder="Email" />
-      <Input placeholder="Password" />
+      <Input placeholder="Password" type="password" />
       <a href="/">I forget my password</a>
       <LogInButton>
         <button>
