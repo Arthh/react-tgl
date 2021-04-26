@@ -5,7 +5,9 @@ import { Container } from './styles';
 const ListAllGames: React.FC = () => {
 
   return (
-    <Container>Teste</Container>
+    <Container>
+      teste
+    </Container>
   );
 };
 

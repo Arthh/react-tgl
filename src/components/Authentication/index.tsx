@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { LogInButton, TitleOfForm } from './styles';
+import { Button, LogInButton, TitleOfForm } from './styles';
 import arrowRight from '../../assets/icons/arrow-right(yellow).svg';
 
 import Form from '../../UI/Form';
@@ -16,10 +16,10 @@ const Authentication: React.FC = () => {
       <Input placeholder="Password" type="password" />
       <a href="/">I forget my password</a>
       <LogInButton>
-        <button>
+        <Button inputColor="#B5C401">
           Log In 
           <img src={arrowRight} alt="" />
-        </button>
+        </Button>
       </LogInButton>
     </Form>
     </>

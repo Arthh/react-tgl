@@ -45,7 +45,6 @@ export const LeftSide = styled.div`
       opacity: 1;
       margin: 0px 10px;
     }
-
   }
 `;
 
