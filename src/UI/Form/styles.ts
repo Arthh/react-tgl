@@ -12,12 +12,12 @@ export const Container = styled.form`
 
   border-radius: 19px;
 
-  a {
-    padding-right: 27px;
-    text-align: right;
-    font: italic normal normal 17px/70px Helvetica;
-    letter-spacing: 0px;
-    color: #C1C1C1;
-    opacity: 1;
-  }
+    a {
+      padding-right: 27px;
+      text-align: right;
+      font: italic normal normal 17px/70px Helvetica;
+      letter-spacing: 0px;
+      color: #C1C1C1;
+      opacity: 1;
+    }
 `;

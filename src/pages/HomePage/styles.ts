@@ -10,6 +10,7 @@ export const Container = styled.div`
 export const LeftSide = styled.div`
   display: flex;
   float: left;
+  width: 60%;
   flex-direction: column;
   
   .optionsArea {
@@ -34,16 +35,6 @@ export const LeftSide = styled.div`
       letter-spacing: 0px;
       color: #868686;
       opacity: 1;
-    }
-
-    button {
-      width: 113px;
-      height: 34px;
-      background-color: #FFFFFF;
-      border: 2px solid black;
-      border-radius: 100px;
-      opacity: 1;
-      margin: 0px 10px;
     }
   }
 `;

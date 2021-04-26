@@ -6,10 +6,11 @@ export default createGlobalStyle `
     padding: 0px;
     box-sizing: border-box;
   }
-
+  
   html, body, #root {
     height: 100vh;
     width: 100vw;
+    background-color: #F7F7F7
   }
 
   *, button, input {
