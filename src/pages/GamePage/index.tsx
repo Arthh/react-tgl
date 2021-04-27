@@ -1,44 +1,63 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Cart from '../../components/Cart';
 import CreateNumbers from '../../components/CreateNumbers';
 import GameTypeButton from '../../components/GameTypeButton';
 
+import { IGameProps } from '../../@types/Game';
 
 import { Container, LeftSide, RightSide } from './styles';
+import api from '../../services/api';
 
 const Home: React.FC = () => {
+  const [games, setGames] = useState([]);
+  const [selectedGame, setSelectedGame] = useState<IGameProps>();
+  const [selectedNumbers, setSelectedNumbers] = useState<number[]>([]);
+  
+    useEffect(() => {
+      const loadAllGames = async() =>{
+        const response = await api.get('/types');
+        setGames(response.data);
+        setSelectedGame(response.data[0]);
+      }
+      loadAllGames();
+    },[]);
+  
+    const changeGameHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
+      const auxGame = games.find((game:IGameProps) => game.type === event.currentTarget.value);
+      setSelectedGame(auxGame);
+    };
+
+    const addNumberHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
+      if(selectedNumbers.length + 1> selectedGame!['max-number']) {
+        return alert('Número máximo adicionado!');
+      }
+      setSelectedNumbers([...selectedNumbers, Number(event.currentTarget.value)]);
+    };
+
   return (
     <Container>
       <LeftSide>
         <div className="infos">
-      <h3 className="title">  NEW BET FOR -Game- </h3>
+      <h3 className="title">  NEW BET FOR {selectedGame?.type} </h3>
       <h3 className="choose-game">Choose a game</h3>
       <div>
-      <GameTypeButton 
-        color={'#7F3992'}
-        itsactive={false}
-      >
-        Teste 1
-      </GameTypeButton>
-      <GameTypeButton 
-        color={'#01AC66'}
-        itsactive={false}
-      >
-        Teste 1
-      </GameTypeButton>
-      <GameTypeButton 
-        color={'#F79C31'}
-        itsactive={false}
-      >
-        Teste 1
-      </GameTypeButton>
+      {games.map((game:IGameProps) => (
+        <GameTypeButton 
+        color={game.color}
+        value={game.type}
+        itsactive={selectedGame?.type === game.type}
+        clickHandler={changeGameHandler}
+        >
+        {game.type}
+        </GameTypeButton>
+      ))}
       </div>
       <h4 className="fill-bet">Fill your bet</h4>
       <span className="bet-explain">
-      Fill your bet Mark as many numbers as you want up to a maximum of 50. Win by  hitting 15, 16, 17, 18, 19, 20 or none of the 20 numbers drawn.
+      {selectedGame?.description}
       </span>
       </div>
-      <CreateNumbers quantity={20} />
+      {selectedGame && <CreateNumbers clickHandler={addNumberHandler} numbers={selectedNumbers} quantity={selectedGame.range | 0} />}
       </LeftSide>
       <RightSide>
         <Cart />

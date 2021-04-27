@@ -7,25 +7,24 @@ import GameTypeButton from '../../components/GameTypeButton';
 
 import { Container, LeftSide, RightSide } from './styles';
 
-interface IGameProps {
-  type: string;
-  description: string;
-  range: number;
-  price: number;
-  color: string;
-}
+import { IGameProps } from '../../@types/Game';
 
 const Home: React.FC = () => {
 const [games, setGames] = useState([]);
+const [selectedGame, setSelectedGame] = useState<IGameProps>();
 
   useEffect(() => {
     const loadAllGames = async() =>{
       const response = await api.get('/types');
       setGames(response.data);
     }
-
     loadAllGames();
   },[]);
+
+  const changeGameHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
+    const auxGame = games.find((game:IGameProps) => game.type === event.currentTarget.value);
+    setSelectedGame(auxGame);
+  };
 
   return (
     <Container>
@@ -37,11 +36,13 @@ const [games, setGames] = useState([]);
 
           <div className="filterArea">
             <h3>Filters</h3>
-            {games.map((game:IGameProps) => (
+            {games.map((game:IGameProps, indx) => (
               <GameTypeButton 
               color={game.color}
-              itsactive={false}
-            >
+              value={game.type}
+              itsactive={selectedGame?.type === game.type}
+              clickHandler={changeGameHandler}
+              >
               {game.type}
             </GameTypeButton>
             ))}

@@ -5,11 +5,16 @@ import { Container } from './styles';
 
 type INumberProps = ButtonHTMLAttributes<HTMLButtonElement>;
 
-const Number: React.FC<INumberProps> = ({children, ...rest}) => {
+interface iNumber extends INumberProps {
+  itsactive: boolean;
+  clickHandler: (event: React.MouseEvent<HTMLButtonElement>) => void;
+}
+
+const Number: React.FC<iNumber> = ({children, clickHandler,itsactive, ...rest}) => {
 
   return (
-    <Container {...rest} onClick={(e:any) => console.log(e.target.value)} > {children} </Container>
-  );
+    <Container {...rest} itsactive={itsactive} onClick={clickHandler} > {children} </Container>
+    );
 };
 
 export default Number;

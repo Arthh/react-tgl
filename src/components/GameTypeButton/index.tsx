@@ -7,14 +7,17 @@ type IGameTypeButtonProps = ButtonHTMLAttributes<HTMLButtonElement>;
 interface IGameProps extends IGameTypeButtonProps {
   color: string;
   itsactive: boolean;
+  clickHandler: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 const GameTypeButton: React.FC<IGameProps> = (
-  {children,color,itsactive, ...rest} ) => {
+  {children,color,itsactive,clickHandler, ...rest} ) => {
 
   return (
     <Container color={color}
-    itsactive={itsactive} {...rest} > { children} </Container>
+    itsactive={itsactive}
+    onClick={clickHandler}
+    {...rest} > { children} </Container>
   );
 };
 
