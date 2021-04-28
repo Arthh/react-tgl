@@ -7,7 +7,7 @@ import GameTypeButton from '../../components/GameTypeButton';
 
 import { Container, LeftSide, RightSide } from './styles';
 
-import { IGameProps } from '../../@types/Game';
+import { IGameProps } from '../../@types/Games';
 
 const Home: React.FC = () => {
 const [games, setGames] = useState([]);

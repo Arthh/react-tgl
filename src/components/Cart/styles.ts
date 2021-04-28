@@ -29,18 +29,19 @@ export const CartInfo = styled.div`
 `;
 
 export const CartList = styled.div`
+  flex-direction: column;
   height: 250px;
-  overflow-y: scroll;
+  overflow-x: scroll;
 
   /* CONFIG PRO SCROLL */
-  ::-webkit-scrollbar {
+   ::-webkit-scrollbar {
     width: 3px;
   }
   ::-webkit-scrollbar-thumb {
     background-color: #707070;
     border-radius: 10px;
   } 
-  /* END CONFIG PRO SCROLL */
+    /* END CONFIG PRO SCROLL */
 `;
 
 export const CartTotalPriceInfos = styled.div`
@@ -78,5 +79,10 @@ export const CartButtons = styled.div`
     background: #F4F4F4 0% 0% no-repeat padding-box;
     border: 1px solid #E2E2E2;
     opacity: 1;
+  }
+  img {
+    width: 24px;
+    height: 20px;
+    margin-left: 5px
   }
 `;

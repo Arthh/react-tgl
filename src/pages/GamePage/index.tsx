@@ -1,44 +1,42 @@
-import React, { useEffect, useState } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useCallback, useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+
 import Cart from '../../components/Cart';
 import CreateNumbers from '../../components/CreateNumbers';
 import GameTypeButton from '../../components/GameTypeButton';
-
 import DefaultButton from '../../UI/DefaultButton';
-import { IGameProps } from '../../@types/Game';
-
+import { IGameProps } from '../../@types/Games';
 import { Container, LeftSide, RightSide, GamesButton } from './styles';
-import api from '../../services/api';
 
-interface newGame {
-  type?: string;
-  price?: number;
-  numbers?: number[];
-}
+import api from '../../services/api';
+import { CartActions } from '../../store/cart-slice';
 
 const Home: React.FC = () => {
-  const [games, setGames] = useState([]);
-  const [listOfGames, setListOfGames] = useState<newGame[]>([]);
-  const [selectedGame, setSelectedGame] = useState<IGameProps>();
-  const [selectedNumbers, setSelectedNumbers] = useState<number[]>([]);
+  const dispatch = useDispatch();
+
+  const [games, setGames] = useState([ ]);
+  const [selectedGame, setSelectedGame] = useState<IGameProps>( );
+  const [selectedNumbers, setSelectedNumbers] = useState<number[]>([ ]);
   
     useEffect(() => {
       // requisição a api para carregar jogos existentes!
       const loadAllGames = async() =>{
         const response = await api.get('/types');
-        setGames(response.data);
         setSelectedGame(response.data[0]);
+        setGames(response.data);
       }
       loadAllGames();
     },[]);
   
     // verificando qual jogo está selecionado
-    const changeGameHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
+    const changeGameHandler = useCallback((event: React.MouseEvent<HTMLButtonElement>) => {
       const auxGame = games.find((game:IGameProps) => game.type === event.currentTarget.value);
       setSelectedGame(auxGame);
-    };
+    }, [games]);
 
     // função que add novo número
-    const addNumberHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
+    const addNumberHandler = useCallback((event: React.MouseEvent<HTMLButtonElement>) => {
       // verificando se já tem o maximo de elementos possíveis
       if(selectedNumbers.length + 1> selectedGame!['max-number']) {
         return alert('Número máximo adicionado!');
@@ -54,7 +52,7 @@ const Home: React.FC = () => {
 
       // add no array o número, após as validações
       return setSelectedNumbers([...selectedNumbers, newNumber]);
-    };
+    },[selectedGame, selectedNumbers]);
 
     // função que limpa os números
     const clearGameHandler = () => {
@@ -73,7 +71,7 @@ const Home: React.FC = () => {
     }
 
     // função que completa os números
-    const completeGameHandler = () => {
+    const completeGameHandler = useCallback(() => {
       var range =  selectedGame!.range;
       var qntNumbersForComplete = selectedGame!['max-number'] - selectedNumbers.length;
       var allNumbers = [];
@@ -84,20 +82,21 @@ const Home: React.FC = () => {
         }
       }
       return setSelectedNumbers([...selectedNumbers, ...allNumbers]);
-    };
+    },[generateRandomNumbers, selectedGame, selectedNumbers]);
 
     // função que add game no carrinho
-    const addGameOnCartHandler = () => {
+    const addGameToCartHandler = useCallback(() => {
       const newGame = {
+        id: String(new Date().getTime()),
         type: selectedGame?.type,
         numbers: selectedNumbers,
-        price: selectedGame?.price
+        price: selectedGame?.price,
+        color: selectedGame?.color
       }
 
-      setListOfGames([...listOfGames, newGame]);
-      clearGameHandler();
-      return;
-    };
+      dispatch(CartActions.addItemToCart(newGame));
+      return clearGameHandler();
+    },[dispatch, selectedGame?.price, selectedGame?.type, selectedNumbers]);
     
 
   return (
@@ -131,7 +130,7 @@ const Home: React.FC = () => {
           <DefaultButton clickHandler={clearGameHandler}>Clear Game </DefaultButton>
         </div>
         <div>
-          <button onClick={addGameOnCartHandler} className="games-add-cart-button">Add to Cart</button>
+          <button onClick={addGameToCartHandler} className="games-add-cart-button">Add to Cart</button>
         </div>
       </GamesButton>
       </LeftSide>
