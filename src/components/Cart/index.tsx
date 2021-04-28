@@ -1,5 +1,4 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import CartItem from '../CartItem';
 
 import formatCurrency from '../../utils/currencyFormater';
@@ -9,13 +8,21 @@ import { INewGameProps } from '../../@types/NewGame';
 
 import saveImg from '../../assets/icons/arrow-right(green).svg';
 import { CartContainer, Container, CartInfo, CartList, CartTotalPriceInfos, CartButtons } from './styles';
-import { Link } from 'react-router-dom';
 
+interface ICartProps {
+  games: INewGameProps[],
+  clickHandler: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  removeHandler: (event: React.MouseEvent<HTMLButtonElement>) => (any);
+}
 
-const Cart: React.FC = () => {
-  const cart = useSelector((state:any) => state.cart);
-  const cartItems = cart.games;
-  
+const Cart: React.FC<ICartProps> = ({games, clickHandler, removeHandler}) => {
+
+  const getTotalCart = () => {
+    var totalPrice = 0;
+    games.forEach(game => totalPrice += game.price);
+    return formatCurrency(totalPrice);
+  }
+
   return (
     <Container>
       <CartContainer>
@@ -24,8 +31,8 @@ const Cart: React.FC = () => {
       </CartInfo>
 
       <CartList>
-       {cartItems.length ? cartItems.map((item:INewGameProps) => (
-         <CartItem game={item}/>
+       {games.length ? games.map((item:INewGameProps) => (
+         <CartItem game={item} removeHandler={removeHandler}/>
        )) : 'Carrinho vazio!'}
       </CartList>
 
@@ -33,16 +40,16 @@ const Cart: React.FC = () => {
         <h2 className="cart-title">
           Cart
         </h2>
-        <h3 className="cart-total-price">TOTAL: {formatCurrency(cart.totalPrice)}</h3>
+        <h3 className="cart-total-price">TOTAL: {getTotalCart()}</h3>
       </CartTotalPriceInfos>
 
       </CartContainer>
 
       <CartButtons>
-        <Link to="/">
+        <button onClick={clickHandler}>
           Save 
           <img src={saveImg} alt="save" />
-        </Link>
+        </button>
       </CartButtons>
     </Container>
   );

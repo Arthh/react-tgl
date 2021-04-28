@@ -7,6 +7,7 @@ import CreateNumbers from '../../components/CreateNumbers';
 import GameTypeButton from '../../components/GameTypeButton';
 import DefaultButton from '../../UI/DefaultButton';
 import { IGameProps } from '../../@types/Games';
+
 import { Container, LeftSide, RightSide, GamesButton } from './styles';
 
 import api from '../../services/api';
@@ -15,6 +16,7 @@ import { CartActions } from '../../store/cart-slice';
 const Home: React.FC = () => {
   const dispatch = useDispatch();
 
+  const [gameList, setGameList] = useState<any[]>([ ]);
   const [games, setGames] = useState([ ]);
   const [selectedGame, setSelectedGame] = useState<IGameProps>( );
   const [selectedNumbers, setSelectedNumbers] = useState<number[]>([ ]);
@@ -33,6 +35,7 @@ const Home: React.FC = () => {
     const changeGameHandler = useCallback((event: React.MouseEvent<HTMLButtonElement>) => {
       const auxGame = games.find((game:IGameProps) => game.type === event.currentTarget.value);
       setSelectedGame(auxGame);
+      return clearGameHandler();
     }, [games]);
 
     // função que add novo número
@@ -93,11 +96,23 @@ const Home: React.FC = () => {
         price: selectedGame?.price,
         color: selectedGame?.color
       }
-
-      dispatch(CartActions.addItemToCart(newGame));
+      setGameList([...gameList, newGame]);
       return clearGameHandler();
-    },[dispatch, selectedGame?.price, selectedGame?.type, selectedNumbers]);
+    },[selectedGame?.price, selectedGame?.type, selectedNumbers]);
     
+    const saveGame = () => {
+      gameList.forEach(game => {
+        dispatch(CartActions.addItemToCart(game));
+      })
+      clearGameHandler();
+      setGameList([]);
+      return
+    };
+
+    const removeGame = (id: any) => {
+      const aux = gameList.filter(game => game.id !== id);
+      setGameList(aux);
+    }
 
   return (
     <Container>
@@ -135,7 +150,7 @@ const Home: React.FC = () => {
       </GamesButton>
       </LeftSide>
       <RightSide>
-        <Cart />
+        <Cart games={gameList} clickHandler={saveGame} removeHandler={removeGame} />
       </RightSide>
     </Container>
   );

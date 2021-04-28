@@ -1,11 +1,11 @@
 import React from 'react';
 
-import removeButton from '../../assets/icons/trash.svg'
 import formatCurrency from '../../utils/currencyFormater';
+import { dateFormater } from '../../utils/dateFormater';
 
 import { Container } from './styles';
 
-interface ICartItemProps {
+interface IGameListProps {
   game: {
     id: string,
     type: string,
@@ -13,29 +13,25 @@ interface ICartItemProps {
     numbers: number[],
     price: number,
   };
-  removeHandler: (event: any) => (any);
 }
 
-const CartItem: React.FC<ICartItemProps> = ({game, removeHandler}) => {
+const ListOneGame: React.FC<IGameListProps> = ({game}) => {
   const formateNumbers = (numbers: number[]) => {
     return numbers.join(', ');
   }; 
 
   return (
     <Container color={game.color}>
-      <div className="removeButtonArea">
-        <button value={game.id} onClick={(e) => removeHandler(e.currentTarget.value)} >
-          <img src={removeButton} alt="trash" />
-        </button>
-      </div>
       <div className="infoGameArea">
         <p>{formateNumbers(game.numbers)}</p>
-        <h2>{game.type}
+        <span>
+          {dateFormater(new Date(1619631583975))} - 
           <span>{formatCurrency(game.price)}</span>
-        </h2>
+        </span>
+        <h2>{game.type}</h2>
       </div>
     </Container>
   );
 };
   
-export default CartItem;
+export default ListOneGame;

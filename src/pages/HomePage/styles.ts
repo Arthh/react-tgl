@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const Container = styled.div`
@@ -39,17 +40,19 @@ export const LeftSide = styled.div`
   }
 `;
 
-
-export const RightSide = styled.div`
-  font: italic normal bold 22px/83px Helvetica;
+export const LinkRight = styled(Link)`
+  font: italic normal bold 25px/83px Helvetica;
   float: right;
   letter-spacing: 0px;
   color: #B5C401;
   opacity: 1;
 
   img {
-    width: 24px;
-    height: 20px;
+    width: 25px;
+    height: 23px;
     padding: 5px 0px 0px 5px;
   }
+`;
+
+export const RightSide = styled.div`
 `;

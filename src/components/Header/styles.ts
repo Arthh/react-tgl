@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const HeaderContainer = styled.header`
@@ -5,11 +6,12 @@ export const HeaderContainer = styled.header`
   width: auto;
   border-bottom: 1.5px solid #ebebeb;
 
-  a {
-    text-decoration: none;
-    font: italic normal bold 20px/70px Helvetica;
-    color: #707070;
-}
+`;
+
+export const LinkNav = styled(Link)`
+  text-decoration: none;
+  font: italic normal bold 20px/70px Helvetica;
+  color: #707070;
 `;
 
 export const Navbar = styled.nav`

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { HeaderContainer, Navbar, DivInfo, DivOptions } from './styles';
+import { HeaderContainer, Navbar, DivInfo, DivOptions, LinkNav } from './styles';
 
 const Header: React.FC = () => {
 
@@ -8,13 +8,13 @@ const Header: React.FC = () => {
     <HeaderContainer>
       <Navbar>
         <DivInfo>
-          <a href="/" className="tittle" >TGL</a>
-          <a href="/">Home</a>
+          <LinkNav to="/home" className="tittle" >TGL</LinkNav>
+          <LinkNav to="/home">Home</LinkNav>
         </DivInfo>
 
         <DivOptions>
-          <a href="/" className="account-option">Account</a>
-          <a href="/">Logout</a>
+          <LinkNav to="/" className="account-option">Account</LinkNav>
+          <LinkNav to="/">Logout</LinkNav>
         </DivOptions>
       </Navbar>
     </HeaderContainer>

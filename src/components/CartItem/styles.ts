@@ -6,11 +6,7 @@ interface IContainerProps {
 
 export const Container = styled.div<IContainerProps>`
   display: flex;
-  margin: 0px 2px 0px 2px;
-
-  &:nth-child(2){
-    margin-bottom: 15px;
-  }
+  margin: 0px 2px 10px 2px;
 
   .removeButtonArea {
     display: flex;

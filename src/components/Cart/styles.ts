@@ -1,5 +1,9 @@
 import styled from "styled-components";
 
+interface ICartProps {
+  height?: string;
+}
+
 export const CartContainer = styled.div`
   margin-left: 20px;
   color: #707070;
@@ -28,9 +32,9 @@ export const CartInfo = styled.div`
   }
 `;
 
-export const CartList = styled.div`
+export const CartList = styled.div<ICartProps>`
   flex-direction: column;
-  height: 250px;
+  height: ${props => props.height ? props.height : '250px'};
   overflow-x: scroll;
 
   /* CONFIG PRO SCROLL */
@@ -67,14 +71,14 @@ export const CartTotalPriceInfos = styled.div`
 `;
 
 export const CartButtons = styled.div`
-  a {
+  button {
     color: #27C383;
     font-size: 35px;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    width: auto;
+    width: 100%;
     height: 96px;
     background: #F4F4F4 0% 0% no-repeat padding-box;
     border: 1px solid #E2E2E2;
