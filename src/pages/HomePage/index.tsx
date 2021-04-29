@@ -41,18 +41,21 @@ const [selectedGame, setSelectedGame] = useState<IGameProps | undefined>();
           </div>
 
           <div className="filterArea">
-            <h3>Filters</h3>
-            {games.map((game:IGameProps, indx) => (
-              <GameTypeButton 
-              color={game.color}
-              value={game.type}
-              itsactive={selectedGame?.type === game.type}
-              clickHandler={changeGameHandler}
-              >
-              {game.type}
-            </GameTypeButton>
+            <div className="filterTitle">
+              <h3>Filters</h3>
+            </div>
+              <div className="buttonArea">
+              {games.map((game:IGameProps, indx) => (
+                <GameTypeButton 
+                color={game.color}
+                value={game.type}
+                itsactive={selectedGame?.type === game.type}
+                clickHandler={changeGameHandler}
+                >
+                {game.type}
+              </GameTypeButton>
             ))}
-            
+            </div>
           </div>
         </div>
 

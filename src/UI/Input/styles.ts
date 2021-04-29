@@ -9,4 +9,5 @@ export const Container = styled.input`
   opacity: 1;
   border-bottom: 2px solid #ebebeb;
   padding: 5px 35px;
+
 `; 

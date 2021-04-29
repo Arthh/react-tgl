@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { Link, useHistory } from 'react-router-dom';
+
 import { Button, LogInButton, TitleOfForm } from './styles';
 import arrowRightYellow from '../../assets/icons/arrow-right(yellow).svg';
 import arrowRightBlack from '../../assets/icons/arrow-right(black).svg';
@@ -14,11 +16,13 @@ interface IAuthProps {
 }
 
 const Authentication: React.FC<IAuthProps> = ({ clickHandler }) => {
+  const history = useHistory();
+
   const handleSubmit = (event: any) => {
     event.preventDefault();
     clickHandler({
       email: event.currentTarget.email.value,
-      numbers: event.currentTarget.password.value, 
+      password: event.currentTarget.password.value, 
     })
   }
 
@@ -26,9 +30,9 @@ const Authentication: React.FC<IAuthProps> = ({ clickHandler }) => {
     <>
     <TitleOfForm>Authentication</TitleOfForm>
     <Form onSubmit={handleSubmit}>
-      <Input name="email" placeholder="Email" />
-      <Input name="password" placeholder="Password" type="password" />
-      <a href="/">I forget my password</a>
+      <Input name="email" placeholder="Email" required />
+      <Input name="password" placeholder="Password" type="password" required/>
+      <Link to="/reset-pass">I forget my password</Link>
       <LogInButton>
         <Button inputColor="#B5C401">
           Log In 
@@ -36,9 +40,9 @@ const Authentication: React.FC<IAuthProps> = ({ clickHandler }) => {
         </Button>
       </LogInButton>
     </Form>
-    <Button inputColor="#707070">
+    <Button inputColor="#707070" onClick={() => history.push('/register')} >
       Sign Up
-      <img src={arrowRightBlack} alt="" />
+      <img src={arrowRightBlack} alt=""/>
     </Button>
     </>
   );

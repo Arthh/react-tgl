@@ -4,6 +4,8 @@ import {Button, LogInButton, TitleOfForm } from './styles';
 import arrowRight from '../../assets/icons/arrow-right(yellow).svg';
 import arrowLeft from '../../assets/icons/arrow-left(gray).svg';
 
+import { useHistory } from 'react-router-dom';
+
 import { IUserProps } from '../../@types/User';
 
 import Form from '../../UI/Form';
@@ -14,13 +16,14 @@ interface IRegisterProps {
 }
 
 const Register: React.FC<IRegisterProps> = ({ clickHandler }) => {
-  
+  const history = useHistory();
+
   const handleSubmit = (event: any) => {
     event.preventDefault();
     clickHandler({
       name: event.currentTarget.name.value,
       email: event.currentTarget.email.value,
-      numbers: event.currentTarget.password.value, 
+      password: event.currentTarget.password.value, 
     })
   }
 
@@ -28,9 +31,9 @@ const Register: React.FC<IRegisterProps> = ({ clickHandler }) => {
     <>
     <TitleOfForm>Registration</TitleOfForm>
     <Form onSubmit={handleSubmit}>
-      <Input name="name" placeholder="Name" type="text" />
-      <Input name="email" placeholder="Email" type="email" />
-      <Input name="password" placeholder="Password" type="password" />
+      <Input name="name" placeholder="Name" type="text" required />
+      <Input name="email" placeholder="Email" type="email" required />
+      <Input name="password" placeholder="Password" type="password" required />
       <LogInButton>
         <Button inputColor="#B5C401">
           Register
@@ -38,7 +41,7 @@ const Register: React.FC<IRegisterProps> = ({ clickHandler }) => {
         </Button>
       </LogInButton>
     </Form>
-    <Button inputColor="#707070">
+    <Button inputColor="#707070" onClick={() => history.push('/')}>
       <img src={arrowLeft} alt="" />
       Back
     </Button>

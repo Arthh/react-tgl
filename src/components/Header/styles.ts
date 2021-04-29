@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 export const HeaderContainer = styled.header`
   background: #F7F7F7  ;
-  width: auto;
+  width: 100%;
   border-bottom: 1.5px solid #ebebeb;
 
 `;
@@ -24,6 +24,7 @@ export const Navbar = styled.nav`
   div {
     display: flex;
   }
+
 `;
 
 export const DivInfo = styled.div`
@@ -43,6 +44,12 @@ export const DivInfo = styled.div`
     border-radius: 6px;
     margin-top: -7px;
   }
+
+  @media(max-width: 1300px) {
+    width: auto;
+    padding: 0;
+    margin: 0;
+  }
 `;
 
 export const DivOptions = styled.div`
@@ -50,5 +57,9 @@ export const DivOptions = styled.div`
 
   .account-option {
     padding-right: 30px;
+  }
+
+  @media(max-width: 1300px) {
+    width: auto;
   }
 `;

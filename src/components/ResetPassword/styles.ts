@@ -10,6 +10,11 @@ export const TitleOfForm = styled.h2`
   letter-spacing: 0px;
   color: #707070;
   opacity: 1;
+
+  @media(max-width: 1300px) {
+    width: 100vw;
+    font-size: 30px;
+  }
 `;
 
 export const LogInButton = styled.div`
@@ -25,6 +30,11 @@ export const Button = styled.button<IButtonProps>`
   color: ${props => props.inputColor};
   opacity: 1;
   margin-bottom: 15px;
+
+  @media(max-width: 1300px) {
+    width: 200px;
+    height: 60px;
+  }
 
     img {
       width: 25px;

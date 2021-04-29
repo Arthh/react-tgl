@@ -6,6 +6,14 @@ export const Container = styled.div`
   width: 100vw;
   display: flex;
   justify-content: space-between;
+
+  @media(max-width: 1300px) {
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    padding: 0px;
+    padding-left: 10px;
+  }
 `;
 
 export const LeftSide = styled.div`
@@ -36,6 +44,36 @@ export const LeftSide = styled.div`
       letter-spacing: 0px;
       color: #868686;
       opacity: 1;
+    }
+  }
+
+  @media(max-width: 1300px) {
+
+    .optionsArea{
+      display: flex;
+      flex-direction: column;
+    }
+
+    .titleArea h2 {
+      width: 200px;
+      font-size: 24px;
+    }
+
+    .filterArea {
+      flex-direction: column;
+    }
+
+    .filterTitle{
+      margin-top: -20px;
+      left: 0px;
+      h3 {
+        font-size: 25px;
+      }
+    }
+
+    .buttonArea {
+     width: 390px;
+     padding-left: 60px;
     }
   }
 `;

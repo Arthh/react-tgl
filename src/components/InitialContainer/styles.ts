@@ -3,12 +3,20 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   display: flex;
-  height: 100vh;
+  height: auto;
+  width: auto;
   padding-top: 148px;
   justify-content: space-between;
   background: #F7F7F7 0% 0% no-repeat padding-box;
   opacity: 1;
   color: #707070;
+
+  @media(max-width: 1300px) {
+    margin-top: -120px;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+  }
 `;
 
 export const LogoTGL = styled.div`
@@ -42,6 +50,21 @@ export const LogoTGL = styled.div`
     h2 {
       margin-top: 10px;
     }
+
+    @media(max-width: 1300px) {
+    margin-left: -130px;
+    width: auto;
+
+    .first-text-logo {
+      font-size: 30px
+    }
+    .last-text-logo {
+      font-size: 34px;
+    }
+    h2 {
+      margin-top: -20px;
+    }
+  }
 `;
 
 
@@ -50,4 +73,11 @@ export const FormArea = styled.div`
   display: flex;
   flex-direction: column;
   font: italic normal bold 30px/65px Helvetica;
+
+  @media(max-width: 1300px) {
+    width: auto;
+    margin-top: 30px;
+    align-items: center;
+    margin-left: 50%;
+  }
 `;

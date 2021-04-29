@@ -18,4 +18,12 @@ export const Container = styled.button<iContainerProps>`
   margin: 0px 10px;
 
   font: italic normal bold 14px Helvetica; 
+
+
+  @media(max-width: 1300px) {
+    font-size: 15px;
+
+    width: 100px;
+    margin: 0px 4px;
+  }
 `;
