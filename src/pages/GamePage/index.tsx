@@ -6,7 +6,10 @@ import Cart from '../../components/Cart';
 import CreateNumbers from '../../components/CreateNumbers';
 import GameTypeButton from '../../components/GameTypeButton';
 import DefaultButton from '../../UI/DefaultButton';
+import AlertError from '../../components/AlertError';
+
 import { IGameProps } from '../../@types/Games';
+import { IErrorProps } from '../../@types/Error';
 
 import { Container, LeftSide, RightSide, GamesButton } from './styles';
 
@@ -16,6 +19,7 @@ import { CartActions } from '../../store/cart-slice';
 const Home: React.FC = () => {
   const dispatch = useDispatch();
 
+  const [error, setError] = useState<IErrorProps | undefined>();
   const [gameList, setGameList] = useState<any[]>([ ]);
   const [games, setGames] = useState([ ]);
   const [selectedGame, setSelectedGame] = useState<IGameProps>( );
@@ -96,16 +100,25 @@ const Home: React.FC = () => {
         price: selectedGame?.price,
         color: selectedGame?.color
       }
+      setError(undefined);
       setGameList([...gameList, newGame]);
       return clearGameHandler();
     },[selectedGame?.price, selectedGame?.type, selectedNumbers]);
     
     const saveGame = () => {
+      let price = 0;
+      gameList.forEach(game => price += game.price);
+
+      if(price < 30){
+        return setError({text: 'Valor mínimo é de 30$', color: 'red'});
+      }
+
       gameList.forEach(game => {
         dispatch(CartActions.addItemToCart(game));
       })
       clearGameHandler();
       setGameList([]);
+      setError({text: 'Bet realizada com sucesso!', color: 'green'});
       return
     };
 
@@ -151,6 +164,7 @@ const Home: React.FC = () => {
       </LeftSide>
       <RightSide>
         <Cart games={gameList} clickHandler={saveGame} removeHandler={removeGame} />
+        {error && <AlertError text={error?.text} color={error?.color} />}
       </RightSide>
     </Container>
   );

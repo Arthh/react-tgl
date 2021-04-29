@@ -11,7 +11,8 @@ export const Container = styled.form`
   border: 1px solid #DDD;
 
   border-radius: 19px;
-
+  margin-bottom: 10px;
+  
     a {
       padding-right: 27px;
       text-align: right;

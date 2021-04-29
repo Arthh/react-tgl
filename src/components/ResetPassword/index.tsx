@@ -4,16 +4,29 @@ import {Button, LogInButton, TitleOfForm } from './styles';
 import arrowRight from '../../assets/icons/arrow-right(yellow).svg';
 import arrowLeft from '../../assets/icons/arrow-left(gray).svg';
 
+import { IUserProps } from '../../@types/User';
+
 import Form from '../../UI/Form';
 import Input from '../../UI/Input';
 
-const ResetPassword: React.FC = () => {
+interface IResetProps {
+  clickHandler: (event: any) => (IUserProps);
+}
+
+const ResetPassword: React.FC<IResetProps> = ({ clickHandler }) => {
+
+  const handleSubmit = (event: any) => {
+    event.preventDefault();
+    clickHandler({
+      email: event.currentTarget.email.value,
+    })
+  }
 
   return (
     <>
     <TitleOfForm>Reset Password</TitleOfForm>
-    <Form >
-      <Input placeholder="Email" />
+    <Form onSubmit={handleSubmit} >
+      <Input name="email" placeholder="Email" type="email" />
       <LogInButton>
         <Button inputColor="#B5C401">
           Send Link

@@ -1,14 +1,19 @@
 import React from 'react';
 
 import Form from '../../components/ResetPassword';
+import { IUserProps } from '../../@types/User';
 
 import InitialContainer from '../../components/InitialContainer';
 
 const AuthPage: React.FC = () => {
-  return (
 
+  const handleProps = (user: IUserProps):any => {
+    console.log(user);
+  };
+
+  return (
     <InitialContainer>
-      <Form />
+      <Form clickHandler={handleProps} />
     </InitialContainer>
   );
 
