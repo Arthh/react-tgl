@@ -7,7 +7,9 @@ import { INewGameProps } from '../../@types/NewGame';
 
 
 import saveImg from '../../assets/icons/arrow-right(green).svg';
-import { CartContainer, Container, CartInfo, CartList, CartTotalPriceInfos, CartButtons } from './styles';
+import { CartContainer, Container, CartInfo, CartList,
+        CartTotalPriceInfos, CartButtons, CartTitle,
+        CartTitleContainer, CartTotalPrice} from './styles';
 
 interface ICartProps {
   games: INewGameProps[],
@@ -20,14 +22,18 @@ const Cart: React.FC<ICartProps> = ({games, clickHandler, removeHandler}) => {
   const getTotalCart = () => {
     var totalPrice = 0;
     games.forEach(game => totalPrice += game.price);
-    return formatCurrency(totalPrice);
+    return Number(totalPrice);
+  }
+
+  const getFormatedTotalPrice = () => {
+    return formatCurrency(getTotalCart());
   }
 
   return (
     <Container>
       <CartContainer>
       <CartInfo>
-        <h2 className="cart-title">cart</h2>
+        <CartTitle >cart</CartTitle>
       </CartInfo>
 
       <CartList>
@@ -37,10 +43,10 @@ const Cart: React.FC<ICartProps> = ({games, clickHandler, removeHandler}) => {
       </CartList>
 
       <CartTotalPriceInfos>
-        <h2 className="cart-title">
+        <CartTitleContainer >
           Cart
-        </h2>
-        <h3 className="cart-total-price">TOTAL: {getTotalCart()}</h3>
+        </CartTitleContainer>
+        <CartTotalPrice>TOTAL: {getFormatedTotalPrice()}</CartTotalPrice>
       </CartTotalPriceInfos>
 
       </CartContainer>

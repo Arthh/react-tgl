@@ -19,4 +19,11 @@ export const Container = styled.button`
     background-color: #27C383;
     color: #F7F7F7;
   }
+
+  @media(max-width: 1300px) {
+    &:nth-child(2) {
+    margin:10px 0px;
+
+  }
+  }
 `;

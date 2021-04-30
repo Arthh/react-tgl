@@ -9,6 +9,26 @@ export const CartContainer = styled.div`
   color: #707070;
 `;
 
+export const CartTitle = styled.h2`
+  font: italic normal bold 24px/85px Helvetica;
+  text-transform: uppercase;
+  opacity: 1;
+`;
+
+export const CartTotalPrice = styled.h3`
+  font: normal normal 300 24px/85px Helvetica;
+  letter-spacing: 0px;
+  text-transform: uppercase;
+  margin-left: 10px;
+`;
+
+export const CartTitleContainer = styled.div`
+  font: italic normal bold 24px/85px Helvetica;
+  letter-spacing: 0px;
+  text-transform: uppercase;
+  opacity: 1;
+`;
+
 export const Container = styled.div`
   width: 317px;
   background: #FFFFFF;
@@ -19,17 +39,16 @@ export const Container = styled.div`
   border: 1px solid #E2E2E2;
   border-radius: 10px;
   opacity: 1;
+
+  @media(max-width: 1590px) {
+    padding: 0px 10px;
+  }
+
 `;
 
 export const CartInfo = styled.div`
   opacity: 1;
   
-  
-  .cart-title {
-    font: italic normal bold 24px/85px Helvetica;
-    text-transform: uppercase;
-    opacity: 1;
-  }
 `;
 
 export const CartList = styled.div<ICartProps>`
@@ -55,19 +74,6 @@ export const CartTotalPriceInfos = styled.div`
   margin-bottom: 20px;
   height: 50px;
   
-  .cart-title {
-    font: italic normal bold 24px/85px Helvetica;
-    letter-spacing: 0px;
-    text-transform: uppercase;
-    opacity: 1;
-  }
-
-  .cart-total-price {
-    font: normal normal 300 24px/85px Helvetica;
-    letter-spacing: 0px;
-    text-transform: uppercase;
-    margin-left: 10px;
-  }
 `;
 
 export const CartButtons = styled.div`

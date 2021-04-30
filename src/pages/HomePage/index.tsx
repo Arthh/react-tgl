@@ -5,7 +5,7 @@ import arrowRight from '../../assets/icons/arrow-right(yellow).svg';
 import ListAllGames from '../../components/ListAllGames';
 import GameTypeButton from '../../components/GameTypeButton';
 
-import { Container, LeftSide, RightSide, LinkRight } from './styles';
+import { Container, LeftSide, RightSide, LinkRight, OptionsArea, TitleArea, FilterArea, FilterTitle, ButtonArea } from './styles';
 
 import { IGameProps } from '../../@types/Games';
 
@@ -26,26 +26,26 @@ const [selectedGame, setSelectedGame] = useState<IGameProps | undefined>();
     const auxGame:IGameProps|undefined = games.find((game:IGameProps) => game.type === event.currentTarget.value);
 
     if(selectedGame?.type === auxGame!.type) {
-      setSelectedGame(undefined)
+      return setSelectedGame(undefined);
+    }else {
+      return setSelectedGame(auxGame);
     }
-    setSelectedGame(auxGame);
   };
-
 
   return (
     <Container>
       <LeftSide>
-        <div className="optionsArea">
-          <div className="titleArea">
+        <OptionsArea >
+          <TitleArea >
             <h2>recent games</h2>
-          </div>
+          </TitleArea>
 
-          <div className="filterArea">
-            <div className="filterTitle">
+          <FilterArea >
+            <FilterTitle>
               <h3>Filters</h3>
-            </div>
-              <div className="buttonArea">
-              {games.map((game:IGameProps, indx) => (
+            </FilterTitle>
+              <ButtonArea >
+              {games.map((game:IGameProps) => (
                 <GameTypeButton 
                 color={game.color}
                 value={game.type}
@@ -55,9 +55,9 @@ const [selectedGame, setSelectedGame] = useState<IGameProps | undefined>();
                 {game.type}
               </GameTypeButton>
             ))}
-            </div>
-          </div>
-        </div>
+            </ButtonArea>
+          </FilterArea>
+        </OptionsArea>
 
         <ListAllGames filter={selectedGame} />
 

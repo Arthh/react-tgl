@@ -16,4 +16,8 @@ export const Container = styled.div`
     border-radius: 10px;
   } 
   /* END CONFIG PRO SCROLL */
+
+  @media(max-width: 1590px) {
+    width: 90vw;
+  }
 `;

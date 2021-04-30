@@ -7,12 +7,47 @@ export const Container = styled.div`
   display: flex;
   justify-content: space-between;
 
-  @media(max-width: 1300px) {
+  @media(max-width: 1590px) {
     width: 100vw;
-    display: flex;
     flex-direction: column;
     padding: 0px;
-    padding-left: 10px;
+    padding-left: 30px;
+  }
+`;
+
+export const OptionsArea = styled.div`
+  align-items: center;
+  display: flex;
+  color: #707070;
+  opacity: 1;
+`;
+
+export const TitleArea = styled.div`
+  font: italic normal bold 21px/80px Helvetica;
+  text-transform: uppercase;
+`;
+
+export const FilterArea = styled.div`
+  display: flex;
+  margin: 0px 0px 0px 30px;
+  align-items: center;
+
+  h3 {
+    font: italic normal normal 17px/70px Helvetica;
+    letter-spacing: 0px;
+    color: #868686;
+    opacity: 1;
+  }
+`;
+
+export const FilterTitle = styled.div`
+
+  @media(max-width: 1590px) {
+    margin-top: -20px;
+    left: 0px;
+    h3 {
+      font-size: 25px;
+    }
   }
 `;
 
@@ -29,33 +64,17 @@ export const LeftSide = styled.div`
     opacity: 1;
   }
 
-  .titleArea {
-    font: italic normal bold 21px/80px Helvetica;
-    text-transform: uppercase;
-  }
 
-  .filterArea {
-    display: flex;
-    margin: 0px 0px 0px 30px;
-    align-items: center;
-
-    h3 {
-      font: italic normal normal 17px/70px Helvetica;
-      letter-spacing: 0px;
-      color: #868686;
-      opacity: 1;
-    }
-  }
-
-  @media(max-width: 1300px) {
+  @media(max-width: 1590px) {
 
     .optionsArea{
       display: flex;
       flex-direction: column;
+      width: 100%;
     }
 
     .titleArea h2 {
-      width: 200px;
+      width: 100%;
       font-size: 24px;
     }
 
@@ -63,19 +82,27 @@ export const LeftSide = styled.div`
       flex-direction: column;
     }
 
-    .filterTitle{
-      margin-top: -20px;
-      left: 0px;
-      h3 {
-        font-size: 25px;
-      }
-    }
-
-    .buttonArea {
-     width: 390px;
-     padding-left: 60px;
-    }
   }
+`;
+
+export const ButtonArea = styled.div`
+    @media(max-width: 1590px) {
+      width: 390px;
+      padding-left: 60px;
+      display: flex;
+      /* width: 90vw; */
+      overflow-x: scroll;
+      /* CONFIG PRO SCROLL */
+        ::-webkit-scrollbar {
+          width: 1px;
+          height: 2px;
+        }
+        ::-webkit-scrollbar-thumb {
+          background-color: #707070;
+          border-radius: 10px;
+        } 
+      /* END CONFIG PRO SCROLL */
+    }
 `;
 
 export const LinkRight = styled(Link)`
@@ -84,13 +111,24 @@ export const LinkRight = styled(Link)`
   letter-spacing: 0px;
   color: #B5C401;
   opacity: 1;
+  
 
   img {
     width: 25px;
     height: 23px;
     padding: 5px 0px 0px 5px;
   }
+
+  @media(max-width: 1590px) {
+    padding-top: 10px;
+    float: left;
+  }
+
 `;
 
 export const RightSide = styled.div`
+
+  
+
+
 `;

@@ -22,7 +22,7 @@ const Header: React.FC = () => {
         </DivInfo>
 
         <DivOptions>
-          <LinkNav to="/" className="account-option">Account</LinkNav>
+          <LinkNav to="/account" className="account-option">Account</LinkNav>
           <LinkNav to="/" onClick={logoutHandler}>Logout</LinkNav>
         </DivOptions>
       </Navbar>

@@ -3,7 +3,7 @@ import React from 'react';
 import formatCurrency from '../../utils/currencyFormater';
 import { dateFormater } from '../../utils/dateFormater';
 
-import { Container } from './styles';
+import { Container, InfoGameArea } from './styles';
 
 interface IGameListProps {
   game: {
@@ -16,20 +16,21 @@ interface IGameListProps {
 }
 
 const ListOneGame: React.FC<IGameListProps> = ({game}) => {
+  console.log(game);
   const formateNumbers = (numbers: number[]) => {
     return numbers.join(', ');
   }; 
 
   return (
     <Container color={game.color}>
-      <div className="infoGameArea">
+      <InfoGameArea color={game.color}>
         <p>{formateNumbers(game.numbers)}</p>
         <span>
           {dateFormater(new Date(1619631583975))} - 
           <span>{formatCurrency(game.price)}</span>
         </span>
         <h2>{game.type}</h2>
-      </div>
+      </InfoGameArea>
     </Container>
   );
 };

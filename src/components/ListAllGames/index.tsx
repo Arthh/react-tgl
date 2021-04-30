@@ -36,7 +36,7 @@ const ListAllGames: React.FC<IListGamesProps> = ({ filter }) => {
       <CartList height="500px">
       {cart.games.length > 0 ? filterGames.map((item:INewGameProps) => (
         <ListOneGame game={item}/>
-       )) : <h3>Carrinho vazio!</h3>}
+       )) : <h3>Lista está vazia!!</h3>}
       </CartList>
     </Container>
   );

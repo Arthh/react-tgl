@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Container, LogoTGL, FormArea  } from './styles';
+import { Container, LogoTGL, FormArea, FirstTextLogo,LastTextLogo  } from './styles';
 
 interface IInitialProps {
   children: React.ReactNode;
@@ -11,15 +11,15 @@ const InitialContainer: React.FC<IInitialProps> = ({ children }) => {
   return (
     <Container > 
       <LogoTGL>
-        <div className="first-text-logo">
+        <FirstTextLogo >
           <h2>The</h2>
           <h2>Greatest</h2>
           <h2>App</h2>
           <button>for</button>
-        </div>
-        <div className="last-text-logo">
+        </FirstTextLogo>
+        <LastTextLogo >
           <h2>lottery</h2>
-        </div>
+        </LastTextLogo>
       </LogoTGL>
       <FormArea>
         {children}

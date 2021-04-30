@@ -11,7 +11,7 @@ import AlertError from '../../components/AlertError';
 import { IGameProps } from '../../@types/Games';
 import { IErrorProps } from '../../@types/Error';
 
-import { Container, LeftSide, RightSide, GamesButton } from './styles';
+import { Container, LeftSide, RightSide, GamesButton, DivInfo, ChooseGameTitle, ButtonArea, BetExplain } from './styles';
 
 import api from '../../services/api';
 import { CartActions } from '../../store/cart-slice';
@@ -130,10 +130,12 @@ const Home: React.FC = () => {
   return (
     <Container>
       <LeftSide>
-        <div className="infos">
+      <DivInfo>
       <h3 className="title">  NEW BET FOR {selectedGame?.type} </h3>
-      <h3 className="choose-game">Choose a game</h3>
-      <div>
+      <ChooseGameTitle >
+        <h3 className="choose-game">Choose a game</h3>
+      </ChooseGameTitle>
+      <ButtonArea >
       {games.map((game:IGameProps) => (
         <GameTypeButton 
         color={game.color}
@@ -144,12 +146,14 @@ const Home: React.FC = () => {
         {game.type}
         </GameTypeButton>
       ))}
-      </div>
+      </ButtonArea>
       <h4 className="fill-bet">Fill your bet</h4>
-      <span className="bet-explain">
+      <BetExplain>
+      <span >
       {selectedGame?.description}
       </span>
-      </div>
+      </BetExplain>
+      </DivInfo>
       {selectedGame && <CreateNumbers clickHandler={addNumberHandler} numbers={selectedNumbers} quantity={selectedGame.range | 0} />}
       
       <GamesButton>

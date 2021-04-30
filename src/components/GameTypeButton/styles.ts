@@ -20,10 +20,9 @@ export const Container = styled.button<iContainerProps>`
   font: italic normal bold 14px Helvetica; 
 
 
-  @media(max-width: 1300px) {
+  @media(max-width: 1590px) {
     font-size: 15px;
-
-    width: 100px;
-    margin: 0px 4px;
+    width: 113px;
+    margin: 3px 4px;
   }
 `;

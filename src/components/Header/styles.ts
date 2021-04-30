@@ -12,6 +12,11 @@ export const LinkNav = styled(Link)`
   text-decoration: none;
   font: italic normal bold 20px/70px Helvetica;
   color: #707070;
+
+  @media(max-width: 1590px) {
+    font-size: 15px;
+    padding: 0px 4px;
+  }
 `;
 
 export const Navbar = styled.nav`
@@ -45,10 +50,19 @@ export const DivInfo = styled.div`
     margin-top: -7px;
   }
 
-  @media(max-width: 1300px) {
+  @media(max-width: 1590px) {
     width: auto;
-    padding: 0;
+    padding: 0px 10px;
     margin: 0;
+
+    .tittle {
+      font-size: 30px;
+      padding: 0px 20px;
+    }
+
+    .tittle::after { 
+      width: 50px;
+    }
   }
 `;
 
@@ -59,7 +73,7 @@ export const DivOptions = styled.div`
     padding-right: 30px;
   }
 
-  @media(max-width: 1300px) {
+  @media(max-width: 1590px) {
     width: auto;
   }
 `;

@@ -26,7 +26,7 @@ export const Button = styled.button<IButtonProps>`
   opacity: 1;
   margin-bottom: 15px;
 
-  @media(max-width: 1300px) {
+  @media(max-width: 1590px) {
     width: 200px;
   }
 

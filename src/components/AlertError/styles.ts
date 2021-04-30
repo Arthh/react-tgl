@@ -15,6 +15,10 @@ export const Container = styled.div<IContainerProps>`
   border-radius: 8%;
   justify-content: center;
   align-items: center;
+
+  @media(max-width: 1590px) {
+    top: 80vh;
+  }
 `; 
 
 

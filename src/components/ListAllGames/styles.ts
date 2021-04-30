@@ -3,8 +3,8 @@ import styled from "styled-components";
 export const Container = styled.main`
   margin-top: 20px;
   display: flex;
-  flex-direction: column;
   overflow-y: scroll;
+  flex-direction: column;
   width: 100%;
   height: 400px;
 

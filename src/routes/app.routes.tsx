@@ -12,8 +12,8 @@ const AppRoutes: React.FC = () => (
     <Route exact path="/reset-pass" component={ResetPasswordPage} />
     <Route exact path="/register" component={RegisterPage} />
     <Route path="*"  component={() => <Redirect to="/" /> } />
-
   </Switch>
 );
+
 
 export default AppRoutes;
