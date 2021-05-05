@@ -1,25 +1,24 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { IBdUsersProps } from '../@types/BdUsers';
+import api from '../services/api'
 
-const initialState: IBdUsersProps = {
-  users: [],
-  isLogged: false
+const initialState = {
+  name: '',
+  email: '',
+  games: [],
 };
 
 const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    addUser(state, action) {
-      const newUser = action.payload;
-      state.users.push(newUser);
-    },
-    logIn(state) {
-      state.isLogged = true;
+    logIn(state, action) {
+      const {name, email } = action.payload
+      state.name = name
+      state.email = email
     },
     logOut(state) {
-      state.isLogged = false;
+      localStorage.removeItem('#@tgltoken@#')
     }
   }
 });

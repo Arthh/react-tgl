@@ -3,11 +3,11 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 
 import { useDispatch } from 'react-redux';
-import { UserActions } from '../../store/user.slice';
 
 import Form from '../../components/Register';
 import { IUserProps } from '../../@types/User';
 
+import { sendCreateUser } from '../../store/user-actions';
 import InitialContainer from '../../components/InitialContainer';
 
 const RegisterPage: React.FC = () => {
@@ -15,8 +15,10 @@ const RegisterPage: React.FC = () => {
   const dispatch = useDispatch();
 
   const handleProps = (user: IUserProps):any => {
-    dispatch(UserActions.addUser(user));
-    history.push('/');
+    try {
+      dispatch(sendCreateUser(user));
+      history.push('/')
+    }catch{}
   };
 
   return (

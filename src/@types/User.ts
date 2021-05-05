@@ -3,4 +3,5 @@ export interface IUserProps {
   name?: string;
   email: number;
   password?: string;
+  token?: string;
 }

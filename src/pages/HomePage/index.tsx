@@ -10,18 +10,27 @@ import { Container, LeftSide, RightSide, LinkRight, OptionsArea, TitleArea, Filt
 import { IGameProps } from '../../@types/Games';
 
 const Home: React.FC = () => {
+
 const [games, setGames] = useState([]);
 const [selectedGame, setSelectedGame] = useState<IGameProps | undefined>();
 
+const loadAllGames = async() =>{
+  try {
+    const response = await api.get('/games');
+    setGames(response.data);
+    console.log(response.data)
+  }catch (err){
+    console.log(err.message)
+  }
+
+}
 
   useEffect(() => {
-    const loadAllGames = async() =>{
-      const response = await api.get('/types');
-      setGames(response.data);
-    }
     loadAllGames();
   },[]);
 
+
+  return <h1> Oi </h1>
   const changeGameHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
     const auxGame:IGameProps|undefined = games.find((game:IGameProps) => game.type === event.currentTarget.value);
 
