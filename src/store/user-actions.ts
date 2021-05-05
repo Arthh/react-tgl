@@ -25,7 +25,6 @@ export const sendCreateUser = (userData:IUserProps) => {
 export const sendLoginUser = (userData: IUserProps) => {
   return async (dispatch: any) => {
     const sendData = async() => {
-      console.log('chegou chapa (LOGGIN) ')
       const response = await api.post('/sessions', {
         email: userData.email,
         password: userData.password
@@ -36,18 +35,25 @@ export const sendLoginUser = (userData: IUserProps) => {
     try {
       const response = await sendData()
       dispatch(UserActions.logIn(response.data))
-
-      const { token } = response.data
-      console.log(token)
-
-      localStorage.setItem('#@tgltoken@#', token);
-      api.defaults.headers.Authorization = `Bearer ${token}`;
-
-
-      console.log(api.defaults.headers.Authorization)
     } catch (err) {
       alert(err.message)
       console.log('deu erro brother')
+    }
+  }
+}
+
+export const getGamesOfUser = () => {
+  return async (dispatch: any) => {
+    const sendData = async() => {
+      const response = await api.get('/games/bets/all', {
+      })
+      return response 
+    }
+    try {
+      const response = await sendData()
+      dispatch(UserActions.setGames(response.data))
+    }catch (err){
+      alert('bugou')
     }
   }
 }
