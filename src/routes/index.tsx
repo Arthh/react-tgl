@@ -6,14 +6,18 @@ import App from './app.routes';
 import Auth from './auth.routes';
 
 const Routes: React.FC = () => {
-  const token = localStorage.getItem('#@tgltoken@#');
-  var logged = false
-  if (token) {
-    api.defaults.headers.authorization = `Bearer ${token}`;
-    logged = true
+
+  const isLogged =  () => {
+    const token = localStorage.getItem('#@tgltoken@#');
+    if (token) {
+      api.defaults.headers.authorization = `Bearer ${token}`;
+      return true;
+    } else {
+      return false;
+    }
   }
   
-  return <BrowserRouter>{logged ? <Auth /> : <App />}</BrowserRouter>;
+  return <BrowserRouter>{isLogged() ? <Auth /> : <App />}</BrowserRouter>;
 };
 
 export default Routes;

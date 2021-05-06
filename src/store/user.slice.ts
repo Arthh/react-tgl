@@ -7,6 +7,8 @@ const initialState = {
   games: [],
 };
 
+
+
 const userSlice = createSlice({
   name: 'user',
   initialState,
@@ -16,7 +18,7 @@ const userSlice = createSlice({
       state.id = id
       state.name = name
       state.email = email
-
+      
       const { token } = action.payload.token
       localStorage.setItem('#@tgltoken@#', token);
     },

@@ -2,6 +2,7 @@
 import api from '../services/api'
 
 import { IUserProps } from '../@types/User';
+import { IResetProps } from '../@types/ResetPass';
 import { UserActions } from './user.slice';
 
 export const sendCreateUser = (userData:IUserProps) => {
@@ -35,6 +36,7 @@ export const sendLoginUser = (userData: IUserProps) => {
     try {
       const response = await sendData()
       dispatch(UserActions.logIn(response.data))
+      
     } catch (err) {
       alert(err.message)
       console.log('deu erro brother')
@@ -75,18 +77,33 @@ export const sendNewGames = (cart:any, totalPrice:any) => {
   }
 }
 
-export const forgotPassword = (email:string) => {
+export const forgotPassword = (email:any) => {
   return async () => {
     const sendData = async() => {
-      const response = await api.post('/passwords', {
-        email
+      const response = await api.post('/passwords', {email:email})
+      return response 
+    }
+
+    try {
+      await sendData()
+    }catch (err){
+      console.log(err)
+    }
+  }
+}
+
+export const resetPassword = (data: IResetProps) => {
+  return async () => {
+    const sendData = async() => {
+      const response = await api.put('/passwords', {
+        token: data.token,
+        password: data.password
       })
       return response 
     }
 
     try {
-      const response = await sendData()
-      console.log(response)
+      await sendData()
     }catch (err){
       console.log(err)
     }

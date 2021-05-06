@@ -2,17 +2,18 @@ import React from 'react';
 
 import Form from '../../components/ResetPassword';
 
-import { forgotPassword } from '../../store/user-actions';
+import { resetPassword } from '../../store/user-actions';
+import { IResetProps } from '../../@types/ResetPass';
 
 import InitialContainer from '../../components/InitialContainer';
 import { useDispatch } from 'react-redux';
 
-const AuthPage: React.FC = () => {
+const ResetPage: React.FC = () => {
   const dispatch = useDispatch();
 
 
-  const handleProps = (email: string):any => {
-   dispatch(forgotPassword(email));
+  const handleProps = (data: IResetProps ):any => {
+   dispatch(resetPassword(data));
   };
 
   return (
@@ -23,4 +24,4 @@ const AuthPage: React.FC = () => {
 
 };
 
-export default AuthPage;
+export default ResetPage;

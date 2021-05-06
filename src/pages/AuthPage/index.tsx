@@ -18,8 +18,10 @@ const AuthPage: React.FC = () => {
   const handleProps = (userLogin: IUserProps):any => {
       try {
         dispatch(sendLoginUser(userLogin))
-        history.push('/')
-      }catch{}
+        history.push('/');
+      }catch(err){
+        alert(err.message)
+      }
   };
 
   return (

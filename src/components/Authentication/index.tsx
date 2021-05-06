@@ -32,7 +32,7 @@ const Authentication: React.FC<IAuthProps> = ({ clickHandler }) => {
     <Form onSubmit={handleSubmit}>
       <Input name="email" placeholder="Email" required />
       <Input name="password" placeholder="Password" type="password" required/>
-      <Link to="/reset-pass">I forget my password</Link>
+      <Link to="/forgot-pass">I forget my password</Link>
       <LogInButton>
         <Button inputColor="#B5C401">
           Log In 

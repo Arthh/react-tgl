@@ -1,7 +1,7 @@
 export interface IUserProps {
   id?: string;
   name?: string;
-  email: number;
+  email: string;
   password?: string;
   token?: string;
 }
