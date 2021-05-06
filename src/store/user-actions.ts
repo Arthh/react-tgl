@@ -57,3 +57,38 @@ export const getGamesOfUser = () => {
     }
   }
 }
+
+export const sendNewGames = (cart:any, totalPrice:any) => {
+  return async () => {
+    const sendData = async() => {
+      const response = await api.post('/games/bets', {
+        cart,
+        totalPrice
+      })
+      return response 
+    }
+    try {
+      await sendData()
+    }catch (err){
+      alert('bugou')
+    }
+  }
+}
+
+export const forgotPassword = (email:string) => {
+  return async () => {
+    const sendData = async() => {
+      const response = await api.post('/passwords', {
+        email
+      })
+      return response 
+    }
+
+    try {
+      const response = await sendData()
+      console.log(response)
+    }catch (err){
+      console.log(err)
+    }
+  }
+}

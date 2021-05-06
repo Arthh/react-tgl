@@ -20,6 +20,9 @@ interface ICartProps {
 const Cart: React.FC<ICartProps> = ({games, clickHandler, removeHandler}) => {
 
   const getTotalCart = () => {
+    if(games.length === 0){
+      return Number(0)
+    } 
     var totalPrice = 0;
     games.forEach(game => totalPrice += game.price);
     return Number(totalPrice);
@@ -37,7 +40,7 @@ const Cart: React.FC<ICartProps> = ({games, clickHandler, removeHandler}) => {
       </CartInfo>
 
       <CartList>
-       {games.length ? games.map((item:INewGameProps) => (
+       {games.length ? games.map((item:any) => (
          <CartItem game={item} removeHandler={removeHandler}/>
        )) : 'Carrinho vazio!'}
       </CartList>

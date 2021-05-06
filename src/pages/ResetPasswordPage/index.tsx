@@ -1,14 +1,18 @@
 import React from 'react';
 
 import Form from '../../components/ResetPassword';
-import { IUserProps } from '../../@types/User';
+
+import { forgotPassword } from '../../store/user-actions';
 
 import InitialContainer from '../../components/InitialContainer';
+import { useDispatch } from 'react-redux';
 
 const AuthPage: React.FC = () => {
+  const dispatch = useDispatch();
 
-  const handleProps = (user: IUserProps):any => {
-    console.log(user);
+
+  const handleProps = (email: string):any => {
+   dispatch(forgotPassword(email));
   };
 
   return (

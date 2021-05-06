@@ -27,7 +27,7 @@ const ListAllGames: React.FC<IListGamesProps> = ({ filter }) => {
   useEffect(() => {
      const filterAllGames = () => {
        if(filter){
-         setFilterGames(cartItems.filter((game:IGameProps) => game.type === filter.type));
+         setFilterGames(cartItems.filter((game:any) => game.game.type === filter.type));
        }else{
          setFilterGames(cartItems);
        }

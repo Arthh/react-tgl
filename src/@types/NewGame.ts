@@ -1,7 +1,15 @@
 export interface INewGameProps {
-  id: string;
-  type: string;
   price: number;
-  numbers: number[];
-  color: string;
+  game: {
+    id: string,
+    type: string,
+    color: string,
+    numbers: number[],
+    price: number,
+    day: Date,
+    game: {
+      type: string,
+      color: string,
+    }
+  };
 }

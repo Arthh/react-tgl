@@ -1,4 +1,5 @@
 import React from 'react';
+import { INewGameProps } from '../../@types/NewGame';
 
 import removeButton from '../../assets/icons/trash.svg'
 import formatCurrency from '../../utils/currencyFormater';
@@ -7,25 +8,20 @@ import {  Container,
           RemoveButtonArea,
           InfoGameArea } from './styles';
 
-interface ICartItemProps {
-  game: {
-    id: string,
-    type: string,
-    color: string,
-    numbers: number[],
-    price: number,
-  };
+interface ICartItemProps extends INewGameProps {
   removeHandler: (event: any) => (any);
 }
 
-const CartItem: React.FC<ICartItemProps> = ({game, removeHandler}) => {
+
+const CartItem: React.FC<any> = ({game, removeHandler}) => {
+
   const formateNumbers = (numbers: number[]) => {
     return numbers.join(', ');
   }; 
 
   return (
     <Container color={game.color}>
-      <RemoveButtonArea>
+      <RemoveButtonArea color={game.color}>
         <button value={game.id} onClick={(e) => removeHandler(e.currentTarget.value)} >
           <img src={removeButton} alt="trash" />
         </button>

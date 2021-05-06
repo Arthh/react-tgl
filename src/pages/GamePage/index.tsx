@@ -12,9 +12,9 @@ import { IGameProps } from '../../@types/Games';
 import { IErrorProps } from '../../@types/Error';
 
 import { Container, LeftSide, RightSide, GamesButton, DivInfo, ChooseGameTitle, ButtonArea, BetExplain } from './styles';
+import { sendNewGames } from '../../store/user-actions'
 
 import api from '../../services/api';
-import { CartActions } from '../../store/cart-slice';
 
 const Home: React.FC = () => {
   const dispatch = useDispatch();
@@ -25,13 +25,17 @@ const Home: React.FC = () => {
   const [selectedGame, setSelectedGame] = useState<IGameProps>( );
   const [selectedNumbers, setSelectedNumbers] = useState<number[]>([ ]);
   
+  const loadAllGames = async() =>{
+    try {
+      const response = await api.get('/games');
+      setSelectedGame(response.data[0]);
+      setGames(response.data);
+    }catch (err){
+      console.log(err.message)
+    }
+  }
+  
     useEffect(() => {
-      // requisição a api para carregar jogos existentes!
-      const loadAllGames = async() =>{
-        const response = await api.get('/types');
-        setSelectedGame(response.data[0]);
-        setGames(response.data);
-      }
       loadAllGames();
     },[]);
   
@@ -45,7 +49,7 @@ const Home: React.FC = () => {
     // função que add novo número
     const addNumberHandler = useCallback((event: React.MouseEvent<HTMLButtonElement>) => {
       // verificando se já tem o maximo de elementos possíveis
-      if(selectedNumbers.length + 1> selectedGame!['max-number']) {
+      if(selectedNumbers.length + 1> selectedGame!['max_number']) {
         return alert('Número máximo adicionado!');
       }
       // valor do botão clicado
@@ -80,7 +84,7 @@ const Home: React.FC = () => {
     // função que completa os números
     const completeGameHandler = useCallback(() => {
       var range =  selectedGame!.range;
-      var qntNumbersForComplete = selectedGame!['max-number'] - selectedNumbers.length;
+      var qntNumbersForComplete = selectedGame!['max_number'] - selectedNumbers.length;
       var allNumbers = [];
       while (allNumbers.length < qntNumbersForComplete) {
         var randomNumber = generateRandomNumbers(range);
@@ -96,8 +100,10 @@ const Home: React.FC = () => {
       const newGame = {
         id: String(new Date().getTime()),
         type: selectedGame?.type,
+        game_id: selectedGame?.id,
         numbers: selectedNumbers,
         price: selectedGame?.price,
+        day: new Date(),
         color: selectedGame?.color
       }
       setError(undefined);
@@ -113,9 +119,21 @@ const Home: React.FC = () => {
         return setError({text: 'Valor mínimo é de 30$', color: 'red'});
       }
 
+
+      const cart:any = [];
+
       gameList.forEach(game => {
-        dispatch(CartActions.addItemToCart(game));
+        cart.push({
+          numbers: game.numbers.toString(),
+          price: game.price,
+          day: game.day,
+          game_id: game.game_id
+        })
       })
+
+
+      dispatch(sendNewGames(cart, price))
+      
       clearGameHandler();
       setGameList([]);
       setError({text: 'Bet realizada com sucesso!', color: 'green'});

@@ -1,29 +1,19 @@
 import React from 'react';
 
 import formatCurrency from '../../utils/currencyFormater';
-import { dateFormater } from '../../utils/dateFormater';
+import { dateFormater } from '../../utils/dateFormater'
 
 import { Container, InfoGameArea } from './styles';
 
-interface IGameListProps {
-  game: {
-    id: string,
-    type: string,
-    color: string,
-    numbers: number[],
-    price: number,
-    // day: string
-  };
-}
 
-const ListOneGame: React.FC<IGameListProps> = ({game}) => {
-
+const ListOneGame: React.FC<any> = ({game}) => {
   return (
-    <Container color='white'>
-      <InfoGameArea color='white'>
+    <Container color={game.game.color}>
+      <InfoGameArea color={game.game.color}>
+        <p>{game.game.type}</p>
         <p>{game.numbers}</p>
         <span>
-          {/* {dateFormater(game.day)} -  */}
+          {dateFormater(new Date(game.day))} - 
           <span>{formatCurrency(game.price)}</span>
         </span>
       </InfoGameArea>
