@@ -6,13 +6,16 @@ import { forgotPassword } from '../../store/user-actions';
 
 import InitialContainer from '../../components/InitialContainer';
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router';
 
 const ForgotPage: React.FC = () => {
   const dispatch = useDispatch();
-
+  const history = useHistory();
 
   const handleProps = (email: string):any => {
    dispatch(forgotPassword(email));
+   alert('Email de recuperação enviado!')
+   history.push('/');
   };
 
   return (

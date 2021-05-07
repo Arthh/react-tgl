@@ -36,6 +36,12 @@ export const InfoGameArea = styled.div<IInfoGameArea>`
       font: italic normal bold 20px/30px Helvetica;
       color: ${props => props.color};
     }
+
+
+  @media(max-width: 1590px) {
+    width: 255px;
+   
+  }
 `;
 
 export const Container = styled.div<IContainerProps>`

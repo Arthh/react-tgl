@@ -6,13 +6,13 @@ import { Button, LogInButton, TitleOfForm } from './styles';
 import arrowRightYellow from '../../assets/icons/arrow-right(yellow).svg';
 import arrowRightBlack from '../../assets/icons/arrow-right(black).svg';
 
-import { IUserProps } from '../../@types/User';
+// import { IUserProps } from '../../@types/User';
 
 import Form from '../../UI/Form';
 import Input from '../../UI/Input';
 
 interface IAuthProps {
-  clickHandler: (event: any) => (IUserProps);
+  clickHandler: (event: any) => (any);
 }
 
 const Authentication: React.FC<IAuthProps> = ({ clickHandler }) => {

@@ -1,5 +1,6 @@
 import React from 'react';
-import {Route, Switch } from 'react-router-dom';
+import { Switch } from 'react-router-dom';
+// import {Redirect, Route, Switch } from 'react-router-dom';
 
 import Layout from '../components/Layout';
 
@@ -8,12 +9,15 @@ import HomePage from '../pages/HomePage';
 import GamePage from '../pages/GamePage';
 import AccountPage from '../pages/AccountPage';
 
+import PrivateRoutes from './PrivateRoutes';
+
 const AuthRoutes: React.FC = () => (
   <Switch>
     <Layout> 
-      <Route exact path="/" component={HomePage} />
-      <Route exact path="/games" component={GamePage} />
-      <Route exact path="/account" component={AccountPage} />
+      {/* <PrivateRoutes path="/" exact component={() => <Redirect to="/home" />} /> */}
+      <PrivateRoutes exact path="/" component={HomePage} />
+      <PrivateRoutes exact path="/games" component={GamePage} />
+      <PrivateRoutes exact path="/account" component={AccountPage} />
     </Layout>
   </Switch>
 );

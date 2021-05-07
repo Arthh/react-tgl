@@ -1,23 +1,19 @@
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
-import api from '../services/api'
+
+import { useAuth } from '../hooks/AuthContext';
 
 import App from './app.routes';
 import Auth from './auth.routes';
 
 const Routes: React.FC = () => {
+  const { userLogged } = useAuth();
+  const logged = userLogged();
 
-  const isLogged =  () => {
-    const token = localStorage.getItem('#@tgltoken@#');
-    if (token) {
-      api.defaults.headers.authorization = `Bearer ${token}`;
-      return true;
-    } else {
-      return false;
-    }
-  }
-  
-  return <BrowserRouter>{isLogged() ? <Auth /> : <App />}</BrowserRouter>;
+  return <BrowserRouter>{logged ? <Auth /> : <App />}</BrowserRouter>;
+  // return (
+  //     <Auth />
+  // );
 };
 
 export default Routes;

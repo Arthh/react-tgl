@@ -4,19 +4,24 @@ import React from 'react';
 import { Button, LogInButton, TitleOfForm } from './styles';
 import arrowRightYellow from '../../assets/icons/arrow-right(yellow).svg';
 
-import { IUserProps } from '../../@types/User';
+// import { IUserProps } from '../../@types/User';
 
 import Form from '../../UI/Form';
 import Input from '../../UI/Input';
 
 interface IAuthProps {
-  clickHandler: (event: any) => (IUserProps);
+  clickHandler: (event: any) => (any);
   userInfo: any
 }
 
 const AccountForm: React.FC<IAuthProps> = ({ clickHandler, userInfo }) => {
   const handleSubmit = (event: any) => {
-   console.log('oi');
+    event.preventDefault();
+    clickHandler({
+      name: event.currentTarget.name.value,
+      email: event.currentTarget.email.value,
+      password: event.currentTarget.password.value, 
+    })
   }
 
   return (

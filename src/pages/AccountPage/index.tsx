@@ -1,13 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 
 import api from '../../services/api';
 
 import { Container } from './styles';
 import AccountForm from '../../components/Account'
+import { useAuth } from '../../hooks/AuthContext';
 
 
 const AccountPage: React.FC = () => {
   const [user, setUser] = useState({})
+  const { updateUser } = useAuth()
 
   const loadAllGames = async() =>{
     try {
@@ -22,9 +24,9 @@ const AccountPage: React.FC = () => {
       loadAllGames();
     },[]);
 
-  const handleProps = ():any => {
-   console.log('oi');
-  };
+  const handleProps = useCallback(async (userData:any) => {
+   await updateUser(userData)
+  },[updateUser]);
 
   return (
     <Container>

@@ -1,28 +1,39 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 
-import { useDispatch } from 'react-redux';
 
 import Form from '../../components/Authentication';
 import InitialContainer from '../../components/InitialContainer';
 
 import { Container } from './styles';
 
-import { IUserProps } from '../../@types/User';
-import { sendLoginUser } from '../../store/user-actions';
+
 import { useHistory } from 'react-router-dom';
+import { useAuth } from '../../hooks/AuthContext';
+
+// import { sendLoginUser } from '../../store/user-actions';
+// import { useDispatch } from 'react-redux';
+// import { IUserProps } from '../../@types/User';
+// import { UserData } from '../../hooks/AuthContext'
 
 const AuthPage: React.FC = () => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const history = useHistory();
+  const { signIn } = useAuth();
 
-  const handleProps = (userLogin: IUserProps):any => {
-      try {
-        dispatch(sendLoginUser(userLogin))
-        history.push('/');
-      }catch(err){
-        alert(err.message)
-      }
-  };
+  const handleProps = useCallback( async(userLogin: any) => {
+      // try {
+      //   dispatch(sendLoginUser(userLogin))
+
+      //   return history.push('/')
+      // }catch(err){
+      //   alert(err.message)
+      // }
+
+      await signIn(userLogin);
+
+      history.go(0);
+
+  },[history, signIn]);
 
   return (
     <Container>

@@ -22,4 +22,8 @@ export const Container = styled.main`
     border-radius: 10px;
   } 
   /* END CONFIG PRO SCROLL */
+
+  @media(max-width: 1590px) {
+    width: 300px;
+  }
 `;

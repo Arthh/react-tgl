@@ -20,11 +20,20 @@ export const OptionsArea = styled.div`
   display: flex;
   color: #707070;
   opacity: 1;
+
+  @media(max-width: 1590px) {
+    flex-direction: column;
+    width: 100vw;
+  }
 `;
 
 export const TitleArea = styled.div`
   font: italic normal bold 21px/80px Helvetica;
   text-transform: uppercase;
+
+  @media(max-width: 1590px) {
+    margin-left: -35%;
+  }
 `;
 
 export const FilterArea = styled.div`
@@ -37,6 +46,12 @@ export const FilterArea = styled.div`
     letter-spacing: 0px;
     color: #868686;
     opacity: 1;
+  }
+
+  @media(max-width: 1590px) {
+    flex-direction: column;
+    width: 100vw;
+    margin-left: -35%;
   }
 `;
 
@@ -64,25 +79,6 @@ export const LeftSide = styled.div`
     opacity: 1;
   }
 
-
-  @media(max-width: 1590px) {
-
-    .optionsArea{
-      display: flex;
-      flex-direction: column;
-      width: 100%;
-    }
-
-    .titleArea h2 {
-      width: 100%;
-      font-size: 24px;
-    }
-
-    .filterArea {
-      flex-direction: column;
-    }
-
-  }
 `;
 
 export const ButtonArea = styled.div`
@@ -91,7 +87,7 @@ export const ButtonArea = styled.div`
       padding-left: 60px;
       display: flex;
       /* width: 90vw; */
-      overflow-x: scroll;
+      overflow-y: scroll;
       /* CONFIG PRO SCROLL */
         ::-webkit-scrollbar {
           width: 1px;

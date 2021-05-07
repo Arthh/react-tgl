@@ -1,17 +1,19 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router';
-import { UserActions } from '../../store/user.slice';
+// import { useDispatch } from 'react-redux';
+// import { UserActions } from '../../store/user.slice';
+import { useAuth } from '../../hooks/AuthContext';
 
 import { HeaderContainer, Navbar, DivInfo, DivOptions, LinkNav } from './styles';
 
 const Header: React.FC = () => {
   const location = useLocation();
-  const dispatch = useDispatch();
+  const { signOut } = useAuth();
+  // const dispatch = useDispatch();
   
-  const logoutHandler = () => {
-    dispatch(UserActions.logOut());
-  }
+  // const logoutHandler = () => {
+  //   dispatch(UserActions.logOut());
+  // }
 
   return (
     <HeaderContainer>
@@ -23,7 +25,7 @@ const Header: React.FC = () => {
 
         <DivOptions>
           <LinkNav to="/account" className="account-option">Account</LinkNav>
-          <LinkNav to="/" onClick={logoutHandler}>Logout</LinkNav>
+          <LinkNav to="/" onClick={signOut}>Logout</LinkNav>
         </DivOptions>
       </Navbar>
     </HeaderContainer>

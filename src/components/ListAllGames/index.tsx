@@ -41,12 +41,12 @@ const ListAllGames: React.FC<IListGamesProps> = ({ filter }) => {
   return (
     <Container>
       <CartList height="500px">
-      {cart.games.length > 0 
+      {filterGames.length > 0 
         ? filterGames.map((item:INewGameProps) => (
         <ListOneGame game={item}/>
        ))
        : 
-       <h3>Lista está vazia!!</h3>}
+       <h3>Não existe jogos desse tipo!!</h3>}
       </CartList>
     </Container>
   );
