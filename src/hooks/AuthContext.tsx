@@ -52,7 +52,7 @@ const AuthProvider: React.FC = ({ children }) => {
     localStorage.setItem('#@tgltoken@#', token);
     api.defaults.headers.Authorization = `Bearer ${token}`;
     }catch(err){
-      return alert('Credenciais Incorretas!');
+     console.log(err.response)   
     }
   };
 

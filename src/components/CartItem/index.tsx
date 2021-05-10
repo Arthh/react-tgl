@@ -1,5 +1,5 @@
 import React from 'react';
-import { INewGameProps } from '../../@types/NewGame';
+// import { INewGameProps } from '../../@types/NewGame';
 
 import removeButton from '../../assets/icons/trash.svg'
 import formatCurrency from '../../utils/currencyFormater';
@@ -8,9 +8,9 @@ import {  Container,
           RemoveButtonArea,
           InfoGameArea } from './styles';
 
-interface ICartItemProps extends INewGameProps {
-  removeHandler: (event: any) => (any);
-}
+// interface ICartItemProps extends INewGameProps {
+//   removeHandler: (event: any) => (any);
+// }
 
 
 const CartItem: React.FC<any> = ({game, removeHandler}) => {

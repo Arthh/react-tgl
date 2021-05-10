@@ -18,7 +18,7 @@ export const sendCreateUser = (userData:IUserProps) => {
     try {
       await sendData()
     }catch (err){
-      alert('Email em uso!')
+      alert(err.message)
     }
   }
 }
@@ -44,6 +44,7 @@ export const sendCreateUser = (userData:IUserProps) => {
 //   }
 // }
 
+// API DESLIGADA - TRATAR ERRO - NÃO LIMPAR CARRINHO!
 export const getGamesOfUser = () => {
   return async (dispatch: any) => {
     const sendData = async() => {
@@ -55,27 +56,30 @@ export const getGamesOfUser = () => {
       const response = await sendData()
       dispatch(UserActions.setGames(response.data))
     }catch (err){
-      alert('bugou')
+      alert('Erro ao recuperar jogos, tente novamente mais tarde!')
     }
   }
 }
 
-export const sendNewGames = (cart:any, totalPrice:any) => {
-  return async () => {
-    const sendData = async() => {
-      const response = await api.post('/games/bets', {
-        cart,
-        totalPrice
-      })
-      return response 
-    }
-    try {
-      await sendData()
-    }catch (err){
-      alert('bugou')
-    }
-  }
-}
+// export const sendNewGames = (cart:any, totalPrice:any) => {
+//   return async () => {
+//     const sendData = async () => {
+//       const response = await api.post('/games/bets', {
+//         cart,
+//         totalPrice
+//       })
+
+//       if (!response.status){
+//         throw new Error('Erro ao enviar requisição');
+//       }
+//     }
+//     try {   
+//      await sendData()
+//     }catch (err){
+//       alert('Erro ao enviar requisição, tente novamente mais tarde!')
+//     }
+//   }
+// }
 
 export const forgotPassword = (email:any) => {
   return async () => {
@@ -87,7 +91,7 @@ export const forgotPassword = (email:any) => {
     try {
       await sendData()
     }catch (err){
-      console.log(err)
+     alert(err)
     }
   }
 }
@@ -105,7 +109,7 @@ export const resetPassword = (data: IResetProps) => {
     try {
       await sendData()
     }catch (err){
-      console.log(err)
+      alert(err.message)
     }
   }
 }

@@ -55,7 +55,7 @@ const Cart: React.FC<ICartProps> = ({games, clickHandler, removeHandler}) => {
       </CartContainer>
 
       <CartButtons>
-        <button onClick={clickHandler}>
+        <button onClick={clickHandler} disabled={games.length > 0 ? false : true} >
           Save 
           <img src={saveImg} alt="save" />
         </button>

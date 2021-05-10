@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import api from '../../services/api';
+import AlertError from '../../components/AlertError';
 
 import arrowRight from '../../assets/icons/arrow-right(yellow).svg';
 import ListAllGames from '../../components/ListAllGames';
@@ -8,21 +9,28 @@ import GameTypeButton from '../../components/GameTypeButton';
 import { Container, LeftSide, RightSide, LinkRight, OptionsArea, TitleArea, FilterArea, FilterTitle, ButtonArea } from './styles';
 
 import { IGameProps } from '../../@types/Games';
+import { IErrorProps } from '../../@types/Error';
 
 const Home: React.FC = () => {
-
+const [error, setError] = useState<IErrorProps | undefined>();
 const [games, setGames] = useState([]);
 const [selectedGame, setSelectedGame] = useState<IGameProps | undefined>();
-
 
 const loadAllGames = async() =>{
   try {
     const response = await api.get('/games');
+
+    if(!response){
+      throw new Error('Erro ao recuperar data.');
+    }
+
     setGames(response.data);
   }catch (err){
-    console.log(err.message)
+    setError({text: 'Erro ao enviar requisição, tente novamente mais tarde!', color: 'red'});
+    return
   }
 }
+
 
   useEffect(() => {
     loadAllGames();
@@ -65,7 +73,8 @@ const loadAllGames = async() =>{
           </FilterArea>
         </OptionsArea>
 
-        <ListAllGames filter={selectedGame} />
+        {error && <AlertError text={error?.text} color={error?.color} />}
+        {!error && <ListAllGames filter={selectedGame} />}
 
       </LeftSide>
       <RightSide>

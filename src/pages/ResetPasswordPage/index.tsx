@@ -15,7 +15,6 @@ const ResetPage: React.FC = () => {
 
   const handleProps = (data: IResetProps ):any => {
     dispatch(resetPassword(data));
-    alert('Senha alterada com sucesso!')
     history.push('/')
   };
 

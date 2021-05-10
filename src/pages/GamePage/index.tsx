@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useCallback, useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+// import { useDispatch } from 'react-redux';
 
 import Cart from '../../components/Cart';
 import CreateNumbers from '../../components/CreateNumbers';
@@ -12,13 +12,14 @@ import { IGameProps } from '../../@types/Games';
 import { IErrorProps } from '../../@types/Error';
 
 import { Container, LeftSide, RightSide, GamesButton, DivInfo, ChooseGameTitle, ButtonArea, BetExplain } from './styles';
-import { sendNewGames } from '../../store/user-actions'
+// import { sendNewGames } from '../../store/user-actions'
 
 import api from '../../services/api';
 
 const Home: React.FC = () => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
+  const [disableButton, setDisableButton] = useState(false)
   const [error, setError] = useState<IErrorProps | undefined>();
   const [gameList, setGameList] = useState<any[]>([ ]);
   const [games, setGames] = useState([ ]);
@@ -30,8 +31,14 @@ const Home: React.FC = () => {
       const response = await api.get('/games');
       setSelectedGame(response.data[0]);
       setGames(response.data);
-    }catch (err){
-      console.log(err.message)
+
+      if(!response){
+        throw new Error('Erro ao recuperar data.');
+      }
+    }catch (err){   
+      setError({text: 'Erro ao recuperar modelos de jogo, tente novamente mais tarde!', color: 'red'});
+      setDisableButton(true)
+      return
     }
   }
   
@@ -97,6 +104,10 @@ const Home: React.FC = () => {
 
     // função que add game no carrinho
     const addGameToCartHandler = useCallback(() => {
+      if(selectedNumbers.length < selectedGame!.max_number){
+        return
+      }
+
       const newGame = {
         id: String(new Date().getTime()),
         type: selectedGame?.type,
@@ -111,7 +122,7 @@ const Home: React.FC = () => {
       return clearGameHandler();
     },[selectedGame?.price, selectedGame?.type, selectedNumbers]);
     
-    const saveGame = () => {
+    const saveGame = async () => {
       let price = 0;
       gameList.forEach(game => price += game.price);
 
@@ -130,14 +141,28 @@ const Home: React.FC = () => {
           game_id: game.game_id
         })
       })
-
-
-      dispatch(sendNewGames(cart, price))
       
-      clearGameHandler();
-      setGameList([]);
-      setError({text: 'Bet realizada com sucesso!', color: 'green'});
-      return
+      try {
+        const response = await api.post('/games/bets', {
+        cart,
+        totalPrice: price
+        })
+
+        if(!response){
+          throw new Error('Sending cart data failed.');
+        }
+
+        clearGameHandler();
+        setGameList([]);
+        // alert('Enviado!')
+        setError({text: 'Bet realizada com sucesso!', color: 'green'});
+        return
+      }catch(err){
+        // alert('Erro')
+        setError({text: 'Erro ao enviar requisição, tente novamente mais tarde!', color: 'red'});
+        return
+      }
+
     };
 
     const removeGame = (id: any) => {
@@ -174,10 +199,11 @@ const Home: React.FC = () => {
       </DivInfo>
       {selectedGame && <CreateNumbers clickHandler={addNumberHandler} numbers={selectedNumbers} quantity={selectedGame.range | 0} />}
       
+      
       <GamesButton>
         <div>
-          <DefaultButton clickHandler={completeGameHandler}>Complete Game </DefaultButton>
-          <DefaultButton clickHandler={clearGameHandler}>Clear Game </DefaultButton>
+          <DefaultButton disabled={disableButton}  clickHandler={completeGameHandler}>Complete Game </DefaultButton>
+          <DefaultButton disabled={disableButton} clickHandler={clearGameHandler}>Clear Game </DefaultButton>
         </div>
         <div>
           <button onClick={addGameToCartHandler} className="games-add-cart-button">Add to Cart</button>

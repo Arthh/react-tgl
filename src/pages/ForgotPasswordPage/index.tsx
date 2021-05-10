@@ -14,7 +14,6 @@ const ForgotPage: React.FC = () => {
 
   const handleProps = (email: string):any => {
    dispatch(forgotPassword(email));
-   alert('Email de recuperação enviado!')
    history.push('/');
   };
 
